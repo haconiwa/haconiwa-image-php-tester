@@ -1,0 +1,60 @@
+155:ec52a9e89135b2efcf9b5d9e64e88cc93e3947ac
+0
+4
+base:9007:1449700451
+extras:393:1476982921
+updates:2560:1477391924
+installed:161:d3ecbba7bcb01a6cc71e226e68b77d91ca975753
+6
+mbr: apr,x86_64,0,1.4.8,3.el7 70
+  repo: base
+  ts_state: u
+  output_state: 20
+  isDep: True
+  reason: dep
+  reinstall: False
+  relatedto: httpd,x86_64,0,2.4.6,40.el7.centos.4@a:dependson apr-util,x86_64,0,1.5.2,6.el7@a:dependson httpd-tools,x86_64,0,2.4.6,40.el7.centos.4@a:dependson
+  depends_on: httpd,x86_64,0,2.4.6,40.el7.centos.4@a apr-util,x86_64,0,1.5.2,6.el7@a httpd-tools,x86_64,0,2.4.6,40.el7.centos.4@a
+mbr: httpd-tools,x86_64,0,2.4.6,40.el7.centos.4 70
+  repo: updates
+  ts_state: u
+  output_state: 20
+  isDep: True
+  reason: dep
+  reinstall: False
+  relatedto: httpd,x86_64,0,2.4.6,40.el7.centos.4@a:dependson
+  depends_on: httpd,x86_64,0,2.4.6,40.el7.centos.4@a
+mbr: apr-util,x86_64,0,1.5.2,6.el7 70
+  repo: base
+  ts_state: u
+  output_state: 20
+  isDep: True
+  reason: dep
+  reinstall: False
+  relatedto: httpd,x86_64,0,2.4.6,40.el7.centos.4@a:dependson httpd-tools,x86_64,0,2.4.6,40.el7.centos.4@a:dependson
+  depends_on: httpd,x86_64,0,2.4.6,40.el7.centos.4@a httpd-tools,x86_64,0,2.4.6,40.el7.centos.4@a
+mbr: httpd,x86_64,0,2.4.6,40.el7.centos.4 70
+  repo: updates
+  ts_state: u
+  output_state: 20
+  isDep: False
+  reason: user
+  reinstall: False
+mbr: mailcap,noarch,0,2.1.41,2.el7 70
+  repo: base
+  ts_state: u
+  output_state: 20
+  isDep: True
+  reason: dep
+  reinstall: False
+  relatedto: httpd,x86_64,0,2.4.6,40.el7.centos.4@a:dependson
+  depends_on: httpd,x86_64,0,2.4.6,40.el7.centos.4@a
+mbr: centos-logos,noarch,0,70.0.6,3.el7.centos 70
+  repo: base
+  ts_state: u
+  output_state: 20
+  isDep: True
+  reason: dep
+  reinstall: False
+  relatedto: httpd,x86_64,0,2.4.6,40.el7.centos.4@a:dependson
+  depends_on: httpd,x86_64,0,2.4.6,40.el7.centos.4@a

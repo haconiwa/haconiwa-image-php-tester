@@ -1,0 +1,17 @@
+root:$6$okTs5/8ch$d/R1GcezgHybg7PCqlooSxqgYjsgI7uc5kopb3kt3f5/yMuyqBchqxRNaxpdO2PFAi6B.4BKycNW5CcjMPqS2/:0:0:99999:7:::
+bin:*:16659:0:99999:7:::
+daemon:*:16659:0:99999:7:::
+adm:*:16659:0:99999:7:::
+lp:*:16659:0:99999:7:::
+sync:*:16659:0:99999:7:::
+shutdown:*:16659:0:99999:7:::
+halt:*:16659:0:99999:7:::
+mail:*:16659:0:99999:7:::
+operator:*:16659:0:99999:7:::
+games:*:16659:0:99999:7:::
+ftp:*:16659:0:99999:7:::
+nobody:*:16659:0:99999:7:::
+systemd-bus-proxy:!!:16961::::::
+systemd-network:!!:16961::::::
+dbus:!!:16961::::::
+sshd:!!:16961::::::

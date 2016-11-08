@@ -1,0 +1,1 @@
+--installroot /var/cache/lxc/centos/x86_64/7/partial -y --nogpgcheck --releasever=7 install yum initscripts passwd rsyslog vim-minimal openssh-server openssh-clients dhclient chkconfig rootfiles policycoreutils

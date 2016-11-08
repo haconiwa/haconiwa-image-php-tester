@@ -1,0 +1,15 @@
+ftp.riken.jp 5.67788290977
+mirror.readyspace.com 5.71555399895
+download.nus.edu.sg 5.2789349556
+mirror.vodien.com 5.22591710091
+ftp.iij.ad.jp 5.65022993088
+mirror.nus.edu.sg 5.83467006683
+ftp.nara.wide.ad.jp 5.67606902122
+mirror.qoxy.com 5.22691106796
+ftp.tsukuba.wide.ad.jp 5.65215110779
+centos.usonyx.net 7.49138903618
+mirror.fairway.ne.jp 5.63920998573
+ftp.jaist.ac.jp 5.66148781776
+mirror.vastspace.net 5.13285303116
+mirror.0x.sg 5.72535204887
+ftp.yz.yamagata-u.ac.jp 99999999999

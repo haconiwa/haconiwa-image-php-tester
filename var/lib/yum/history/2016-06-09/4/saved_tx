@@ -1,0 +1,42 @@
+161:d3ecbba7bcb01a6cc71e226e68b77d91ca975753
+0
+4
+base:9007:1449700451
+extras:393:1476982921
+updates:2560:1477391924
+installed:165:4b666202c973b792c2987936d18e2bf2b59502fa
+4
+mbr: php,x86_64,0,5.4.16,36.3.el7_2 70
+  repo: updates
+  ts_state: u
+  output_state: 20
+  isDep: False
+  reason: user
+  reinstall: False
+mbr: php-cli,x86_64,0,5.4.16,36.3.el7_2 70
+  repo: updates
+  ts_state: u
+  output_state: 20
+  isDep: True
+  reason: dep
+  reinstall: False
+  relatedto: php,x86_64,0,5.4.16,36.3.el7_2@a:dependson
+  depends_on: php,x86_64,0,5.4.16,36.3.el7_2@a
+mbr: libzip,x86_64,0,0.10.1,8.el7 70
+  repo: base
+  ts_state: u
+  output_state: 20
+  isDep: True
+  reason: dep
+  reinstall: False
+  relatedto: php-common,x86_64,0,5.4.16,36.3.el7_2@a:dependson
+  depends_on: php-common,x86_64,0,5.4.16,36.3.el7_2@a
+mbr: php-common,x86_64,0,5.4.16,36.3.el7_2 70
+  repo: updates
+  ts_state: u
+  output_state: 20
+  isDep: True
+  reason: dep
+  reinstall: False
+  relatedto: php,x86_64,0,5.4.16,36.3.el7_2@a:dependson php-cli,x86_64,0,5.4.16,36.3.el7_2@a:dependson
+  depends_on: php,x86_64,0,5.4.16,36.3.el7_2@a php-cli,x86_64,0,5.4.16,36.3.el7_2@a
