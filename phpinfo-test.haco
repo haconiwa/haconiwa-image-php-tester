@@ -1,0 +1,58 @@
+# -*- mode: ruby -*-
+
+unless ENV['APACHE_PORT']
+  raise "env APACHE_PORT not found"
+end
+
+Haconiwa.define do |config|
+
+  root = Pathname.new("/var/lib/haconiwa/haconiwa-test-#{ENV['APACHE_PORT']}")
+  uid_gid_offset = 100
+  rootfs_root_uid = ENV['APACHE_PORT'].to_i * uid_gid_offset
+  config.name = "haconiwa-test-#{ENV['APACHE_PORT']}"
+
+  if ENV['DEBUG'] == "apache"
+    config.init_command = ["/usr/bin/env", "APACHE_PORT=#{ENV['APACHE_PORT']}", "APACHE_PID=/var/run/httpd/httpd.#{ENV['APACHE_PORT']}.pid", "/usr/sbin/httpd", "-X"]
+  elsif ENV['DEBUG'] == "bash"
+    config.init_command = "/bin/bash"
+  else
+    config.init_command = ["/usr/bin/env", "APACHE_PORT=#{ENV['APACHE_PORT']}", "APACHE_PID=/var/run/httpd/httpd.#{ENV['APACHE_PORT']}.pid", "/usr/sbin/httpd", "-DFOREGROUND"]
+    config.daemonize!
+  end
+
+  config.bootstrap do |b|
+    haconiwa_image = Pathname.new("/var/lib/haconiwa/images/haconiwa-image-php-tester.tar.gz")
+    unless Dir.exists?(root)
+      `mkdir -p #{root}`
+      `tar xf #{haconiwa_image} -C #{root}`
+    end
+    `mknod -m 444 #{root}/dev/random c 1 9` unless File.exist?("#{root}/dev/random")
+    `mknod -m 444 #{root}/dev/urandom c 1 9` unless File.exist?("#{root}/dev/random")
+    `chown -R #{rootfs_root_uid}:#{rootfs_root_uid} #{root}`
+  end
+
+  config.chroot_to root
+
+  config.namespace.unshare "ipc"
+  config.namespace.unshare "uts"
+  config.namespace.unshare "mount"
+  config.namespace.unshare "pid"
+
+  config.rootfs_owner uid: rootfs_root_uid, gid: rootfs_root_uid
+  config.namespace.set_uid_mapping min: 0, max: 99, offset: rootfs_root_uid
+  config.namespace.set_gid_mapping min: 0, max: 99, offset: rootfs_root_uid
+
+  config.add_mount_point "tmpfs", to: root.join("tmp"), fs: "tmpfs"
+
+  config.mount_network_etc(root, host_root: "/etc")
+
+  config.mount_independent "procfs"
+  config.mount_independent "sysfs"
+  config.mount_independent "devtmpfs"
+  config.mount_independent "devpts"
+  config.mount_independent "shm"
+
+  config.cgroup["cpu.cfs_period_us"] = 100000
+  config.cgroup["cpu.cfs_quota_us"]  =  30000
+
+end
