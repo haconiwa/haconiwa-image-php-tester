@@ -4,9 +4,12 @@ unless ENV['APACHE_PORT']
   raise "env APACHE_PORT not found"
 end
 
+#Capability.drop_bound(Capability.from_name 'cap_chown')
+
 Haconiwa.define do |config|
 
   root = Pathname.new("/var/lib/haconiwa/haconiwa-test-#{ENV['APACHE_PORT']}")
+  haconiwa_image = Pathname.new("/var/lib/haconiwa/images/haconiwa-image-php-tester.tar.gz")
   uid_gid_offset = 100
   rootfs_root_uid = ENV['APACHE_PORT'].to_i * uid_gid_offset
   config.name = "haconiwa-test-#{ENV['APACHE_PORT']}"
@@ -21,7 +24,6 @@ Haconiwa.define do |config|
   end
 
   config.bootstrap do |b|
-    haconiwa_image = Pathname.new("/var/lib/haconiwa/images/haconiwa-image-php-tester.tar.gz")
     unless Dir.exists?(root)
       `mkdir -p #{root}`
       `tar xf #{haconiwa_image} -C #{root}`
@@ -39,8 +41,8 @@ Haconiwa.define do |config|
   config.namespace.unshare "pid"
 
   config.rootfs_owner uid: rootfs_root_uid, gid: rootfs_root_uid
-  config.namespace.set_uid_mapping min: 0, max: 99, offset: rootfs_root_uid
-  config.namespace.set_gid_mapping min: 0, max: 99, offset: rootfs_root_uid
+  config.namespace.set_uid_mapping min: 0, max: rootfs_root_uid - 1, offset: rootfs_root_uid
+  config.namespace.set_gid_mapping min: 0, max: rootfs_root_uid - 1, offset: rootfs_root_uid
 
   config.add_mount_point "tmpfs", to: root.join("tmp"), fs: "tmpfs"
 
@@ -54,5 +56,54 @@ Haconiwa.define do |config|
 
   config.cgroup["cpu.cfs_period_us"] = 100000
   config.cgroup["cpu.cfs_quota_us"]  =  30000
+
+  config.capabilities.allow :all
+
+  #%w(
+
+  #  #CAP_AUDIT_CONTROL
+  #  ##CAP_AUDIT_READ
+  #  #CAP_AUDIT_WRITE
+  #  #CAP_BLOCK_SUSPEND
+  #  CAP_CHOWN
+  #  ##CAP_DAC_OVERRIDE
+  #  #CAP_DAC_READ_SEARCH
+  #  ##CAP_FOWNER
+  #  ##CAP_FSETID
+  #  #CAP_IPC_LOCK
+  #  #CAP_IPC_OWNER
+  #  ##CAP_KILL
+  #  #CAP_LEASE
+  #  #CAP_LINUX_IMMUTABLE
+  #  #CAP_MAC_ADMIN
+  #  #CAP_MAC_OVERRIDE
+  #  #CAP_MKNOD
+  #  #CAP_NET_ADMIN
+  #  #CAP_NET_BIND_SERVICE
+  #  ##CAP_NET_RAW
+  #  ##CAP_SETGID
+  #  ##CAP_SETFCAP
+  #  ##CAP_SETPCAP
+  #  ##CAP_SETUID
+  #  #CAP_SYS_ADMIN
+  #  #CAP_SYS_BOOT
+  #  #CAP_SYS_CHROOT
+  #  #CAP_SYS_MODULE
+  #  #CAP_SYS_NICE
+  #  #CAP_SYS_PACCT
+  #  #CAP_SYS_PTRACE
+  #  #CAP_SYS_RAWIO
+  #  #CAP_SYS_RESOURCE
+  #  #CAP_SYS_TIME
+  #  #CAP_SYS_TTY_CONFIG
+  #  #CAP_SYSLOG
+  #  #CAP_WAKE_ALARM
+
+  #).each do |cap|
+  #  next if cap.start_with? '#'
+  #  config.capabilities.drop cap.downcase
+  #end
+  
+  #config.capabilities.drop "cap_chown"
 
 end
