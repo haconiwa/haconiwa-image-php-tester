@@ -69,6 +69,13 @@ root       21082  0.0  0.0  16092  3360 ?        Ss   15:32   0:00 haconiwa star
 1001448    21089  0.0  0.0 309844  6784 ?        S    15:32   0:00      \_ /usr/sbin/httpd -DFOREGROUND
 ```
 
+- curl
+
+```
+curl localhost:10001/phpinfo.php
+```
+
+- bash
 
 ```ruby
 # DEBUG=bash APACHE_PORT=7000 haconiwa start phpinfo-test.haco 
