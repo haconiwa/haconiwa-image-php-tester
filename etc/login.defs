@@ -30,20 +30,20 @@ PASS_WARN_AGE	7
 #
 # Min/max values for automatic uid selection in useradd
 #
-UID_MIN                  1000
-UID_MAX                 60000
+UID_MIN                 90
+UID_MAX                 99
 # System accounts
-SYS_UID_MIN               201
-SYS_UID_MAX               999
+SYS_UID_MIN             20
+SYS_UID_MAX             89
 
 #
 # Min/max values for automatic gid selection in groupadd
 #
-GID_MIN                  1000
-GID_MAX                 60000
+GID_MIN                 90
+GID_MAX                 99
 # System accounts
-SYS_GID_MIN               201
-SYS_GID_MAX               999
+SYS_GID_MIN             20
+SYS_GID_MAX             89
 
 #
 # If defined, this command is run when removing a user.
