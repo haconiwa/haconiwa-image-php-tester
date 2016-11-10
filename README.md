@@ -3,7 +3,7 @@
 
 ## Quick Install and Run
 
-```
+```bash
 cd /var/lib/haconiwa/images/
 git clone https://github.com/haconiwa/haconiwa-image-php-tester.git
 cd haconiwa-image-php-tester
